@@ -5,9 +5,12 @@
 #include <stdio.h>
 
 void ray_col(vec3 out, struct ray *r) {
-  out[0] = 0.f;
-  out[1] = 0.f;
-  out[2] = 0.f;
+  vec3 res, tmp, tmp2;
+  vec3_norm(res, r->dir);
+  float a = 0.5f * (res[1] + 1.f);
+  vec3_scale(tmp, (vec3){1.f, 1.f, 1.f}, 1.f - a);
+  vec3_scale(tmp2, (vec3){0.5f, 0.7f, 1.f}, a);
+  vec3_add(out, tmp, tmp2);
 }
 
 void render(const vec3 pixel_color) {
